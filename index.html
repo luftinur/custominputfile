@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Custom Input File - Koding Space</title>
+		<meta name="description" content="Membuat Tombol Input File CSS, Jquery">
+		<meta name="author" content="Koding Space">
+		<meta name="viewport" content="width=device-width; initial-scale=1.0">		
+		
+		<!-- LOAD BOOTSTRAP, jQuery,  Font Awesome CDN -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>		
+		
+		<style>
+			
+			
+			.demo-wrapper{
+				padding:50px;
+				padding-top:25px;
+				margin-top:25px;
+				background-color:#dfe7ed;
+				min-height:250px;
+			}
+			
+			.uploadWrapper{
+				position:relative;
+				overflow:hidden;
+				margin-top:45px;
+			}
+			
+			.formInput{
+				position:relative;
+				overflow:hidden;
+				max-width:380px;
+				width:100%;
+				margin:0 auto;
+			}
+			.inputFile{
+				position:absolute;
+				z-index:5;
+				width:100%;
+				height:100%;
+				top:0;
+				left:0;
+				opacity:0;
+				cursor:pointer;
+			}
+			
+			
+			/* DEMO 2 */
+			.uploadWrapper.demo2{
+				max-width:380px;
+				margin:0 auto;
+				margin-top:45px;
+			}
+			.uploadWrapper.demo2 .formInput{
+				max-width:auto;
+			}
+			
+			/* DEMO 3 */
+			.uploadWrapper.demo3{
+				text-align:center;
+				margin:0 auto;
+				margin-top:45px;
+			}
+			.uploadWrapper.demo3 .btn{
+				width:85px;
+				height:90px;
+				overflow:hidden;
+			}
+			
+			.uploadWrapper.demo3:hover .btn{
+				background-color:#444444;
+			}
+			
+				/* DEMO 4 */
+			.uploadWrapper.demo4:hover a{
+				color:#444444;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div class="container mt-3">
+			<div class="text-center">
+				<h1 class="h3">Custom Input File dengan CSS dan jQuery</h1>
+				<p>Membuat input file lebih menarik dengan CSS</p>
+			</div>
+			<hr>
+			<div class="row mt-4">
+				<div class="col-md-6">
+					
+					<div class="demo-wrapper">
+						<h5 class="text-center mb-3">Contoh 1 - Standard</h5>
+						<!-- CONTOH 1 - BASIC -->
+						<div class="uploadWrapper demo1">
+							<div class="formInput d-block text-center">
+								<button class="btn btn-success btn-block rounded-0 "><i class="fa fa-upload"></i> <span class="label">Pilih File</span></button>
+								<input type="file" id="inputFile1" class="inputFile" value="">
+							</div>		
+							<a href="javascript:;" style="display:none" class="reset p-2 text-center text-muted">Reset</a>							
+						</div>
+						
+					</div>
+					
+				</div>
+				
+				
+				<div class="col-md-6">
+					
+					<div class="demo-wrapper">
+						<h5 class="text-center mb-3">Contoh 2 - Input Group Bootstrap </h5>
+						<!-- CONTOH 2 - INPUT GROUP BOOTSTRAP -->
+						<div class="uploadWrapper demo2">
+						
+							<div class="input-group">
+							
+							  <div class="input-group-prepend">
+								<button class="btn btn-success rounded-0"><i class="fa fa-upload"></i> Pilih File</button>
+								<input type="file" id="inputFile2" class="inputFile" value="">
+							  </div>
+							  
+							  <div class="label form-control"></div>
+							  
+							</div>
+							
+						</div>
+						
+					</div>
+					
+				</div>
+			
+			</div>
+			
+			<div class="row mt-4">
+				<div class="col-md-6">
+					
+					<div class="demo-wrapper">
+						<h5 class="text-center mb-3">Contoh 3 - Tombol Icon</h5>
+						<!-- CONTOH 1 - BASIC -->
+						<div class="uploadWrapper demo3">
+							<div class="formInput d-block text-center">
+								<button class="btn btn-secondary rounded-0"><i class="fa fa-upload"></i></button>
+								<input type="file" id="inputFile3" class="inputFile" value="">
+							</div>												
+							<span class="label d-block"></span>
+						</div>
+						
+					</div>
+					
+				</div>
+				
+				
+				<div class="col-md-6">
+					
+					<div class="demo-wrapper">
+						<h5 class="text-center mb-3">Contoh 4 - Text Label Upload </h5>
+						<!-- CONTOH 2 - INPUT GROUP BOOTSTRAP -->
+						<div class="uploadWrapper demo4">
+						
+							  <div class="formInput text-center">
+								<input type="file" id="inputFile4" class="inputFile" value="">
+								<a href="javascript:;" class="d-block p-4 label">Pilih File</a>
+							  </div>							  
+						</div>
+						
+					</div>
+					
+				</div>
+			
+			</div>
+			
+			
+		</div>
+		
+		<script>
+		
+			/* DEMO 1 */
+			var label1 = $(".uploadWrapper.demo1 .label");
+			
+			$("#inputFile1").on("change",function(e){
+							
+				var fileName = $(this)[0].files[0].name;
+				label1.html(fileName);				
+				if($(this)[0].files.length){				
+					$(".uploadWrapper.demo1 .reset").css("display", "block");
+				}
+							
+			});
+			
+			$(".uploadWrapper.demo1 .reset").on("click", function(){
+				$("#inputFile1").val("");
+				label1.html("Pilih File");
+				$(this).hide();
+			});
+		
+			/* DEMO 2 */
+			var label2 = $(".uploadWrapper.demo2 .label");
+			
+			$("#inputFile2").on("change",function(e){
+							
+				var fileName = $(this)[0].files[0].name;
+				label2.html(fileName);				
+				
+							
+			});
+			
+			/* DEMO 3 */		
+			var label3 = $(".uploadWrapper.demo3 .label");
+			
+			$("#inputFile3").on("change",function(e){
+				var fileName = $(this)[0].files[0].name;
+				label3.html(fileName);		
+			});
+			
+			/* DEMO 4 */
+				var label4 = $(".uploadWrapper.demo4 .label");			
+				$("#inputFile4").on("change",function(e){								
+					var fileName = $(this)[0].files[0].name;
+					label4.html(fileName);							
+				});
+		</script>
+	
+	</body>
+</html>
